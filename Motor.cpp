@@ -10,6 +10,8 @@ Motor::Motor(int gpioPin, int minPWM, int maxPWM) {
 	driver.setRange(maxPWM);
 }
 
+Motor::Motor() {}
+
 Motor::~Motor() {}
 
 double Motor::getThrottle() {
@@ -26,6 +28,5 @@ bool Motor::setThrottle(double throttle) {
 }
 
 bool Motor::initialise() {
-	setThrottle(100);
-	usleep(3000000);
+	return setThrottle(100);
 }

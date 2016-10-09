@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <time.h>
-
+#include <sys/time.h>
 
 /*
 	Basic timer class

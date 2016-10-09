@@ -13,6 +13,7 @@ public:
 		gpioPin is the pin that the PWM device is connected to
 	*/
 	PWMDriver(int gpioPin);
+	PWMDriver();
 	~PWMDriver();
 
 	/*

@@ -1,9 +1,6 @@
 #include "IMU.h"
 #include <iostream>
 #include <math.h>
-#include "MPU9250/I2Cdev.h"
-#include "MPU9250/MPU6050_6Axis_MotionApps20.h"
-
 
 IMU::IMU() {}
 
@@ -40,6 +37,7 @@ bool IMU::initialise() {
 
 		// get expected DMP packet size for later comparison
 		packetSize = mpu.dmpGetFIFOPacketSize();
+		return true;
 	}
 	else {
 		// ERROR!
@@ -48,6 +46,7 @@ bool IMU::initialise() {
 		// (if it's going to break, usually the code will be 1)
 		printf("    DMP Initialization failed (code %d)\n", devStatus);
 	}
+	return false;
 }
 
 bool IMU::read() {
@@ -59,7 +58,6 @@ bool IMU::read() {
 		// reset so we can continue cleanly
 		mpu.resetFIFO();
 		printf("FIFO overflow! Resetting FIFO\n");
-		return false;
 	} else if (fifoCount >= 42) {  // otherwise, check for DMP data ready interrupt (this should happen frequently)
 		mpu.getFIFOBytes(fifoBuffer, packetSize); // read a packet from FIFO
 		mpu.dmpGetQuaternion(&q, fifoBuffer);
@@ -70,6 +68,7 @@ bool IMU::read() {
 
 		return(true); //Only case of 0 return is if motors are updated
 	}
+	return false;
 }
 
 double IMU::getYaw() {

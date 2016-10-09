@@ -19,6 +19,7 @@ bool Stabiliser::initialise() {
 	//Set motor correction pairs
 	//First index is the axis (YPR)
 	//Second index is whether the motors are additive or subtractive
+	//No yaw control as of yet
 	axisMotorPairs[1][0].push_back(&motors[0]);
 	axisMotorPairs[1][1].push_back(&motors[1]);
 	axisMotorPairs[2][0].push_back(&motors[2]);
@@ -41,7 +42,7 @@ bool Stabiliser::initialise() {
 }
 
 bool Stabiliser::update() {
-	if (imu.read) {
+	if (imu.read()) {
 		//Read current orientation
 		double ypr[3];
 		ypr[0] = imu.getYaw();
