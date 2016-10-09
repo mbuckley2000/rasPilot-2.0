@@ -44,5 +44,5 @@ public:
 private:
 	int gpioPin;
 	int rangeCap;
-	static std::ofstream device;
+	std::ofstream device;
 };
