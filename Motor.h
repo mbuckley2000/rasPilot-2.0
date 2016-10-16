@@ -16,7 +16,6 @@ public:
 	*/
 	Motor(int gpioPin, int minPWM, int maxPWM);
 	~Motor();
-	Motor();
 
 	/*
 		Returns the current throttle % of the motor

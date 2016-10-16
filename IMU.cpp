@@ -1,6 +1,7 @@
 #include "IMU.h"
 #include <iostream>
-#include <math.h>
+
+#define PI 3.14159265359
 
 IMU::IMU() {}
 
@@ -59,7 +60,7 @@ bool IMU::read() {
 		mpu.resetFIFO();
 		printf("FIFO overflow! Resetting FIFO\n");
 	} else if (fifoCount >= 42) {  // otherwise, check for DMP data ready interrupt (this should happen frequently)
-		mpu.getFIFOBytes(fifoBuffer, packetSize); // read a packet from FIFO
+		mpu.getFIFOBytes(fifoBuffer, (uint8_t) packetSize); // read a packet from FIFO
 		mpu.dmpGetQuaternion(&q, fifoBuffer);
 		mpu.dmpGetGravity(&gravity, &q);
 		mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
@@ -72,13 +73,13 @@ bool IMU::read() {
 }
 
 double IMU::getYaw() {
-	return ypr[0] * 180 / M_PI;;
+	return ypr[0] * 180 / PI;;
 }
 
 double IMU::getPitch() {
-	return ypr[1] * 180 / M_PI;;
+	return ypr[1] * 180 / PI;;
 }
 
 double IMU::getRoll() {
-	return ypr[2] * 180 / M_PI;;
+	return ypr[2] * 180 / PI;;
 }

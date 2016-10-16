@@ -10,7 +10,8 @@ double PIDController::getCorrection() {
 	double elapsedSeconds = timer.getElapsedSeconds();
 	timer.start();
 	double currentError = getCurrentError();
-	double result = getPCorrection(currentError) + getICorrection(currentError, lastError, elapsedSeconds); +getDCorrection(currentError, lastError, elapsedSeconds);
+    double result = getPCorrection(currentError) + getICorrection(currentError, lastError, elapsedSeconds) +
+                    getDCorrection(currentError, lastError, elapsedSeconds);
 	lastError = currentError;
 	return result;
 }

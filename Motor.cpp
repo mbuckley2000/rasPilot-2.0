@@ -1,16 +1,9 @@
 #include "Motor.h"
-#include <unistd.h>
 
-Motor::Motor(int gpioPin, int minPWM, int maxPWM) {
-	this->gpioPin = gpioPin;
-	this->minPWM = minPWM;
-	this->maxPWM = maxPWM;
-	driver = PWMDriver(gpioPin);
+Motor::Motor(int gpioPin, int minPWM, int maxPWM) : driver(gpioPin), gpioPin(gpioPin), minPWM(minPWM), maxPWM(maxPWM) {
 	driver.initialise();
 	driver.setRange(maxPWM);
 }
-
-Motor::Motor() {}
 
 Motor::~Motor() {}
 
@@ -21,7 +14,7 @@ double Motor::getThrottle() {
 bool Motor::setThrottle(double throttle) {
 	if (throttle >= 0 && throttle <= 100) {
 		this->throttle = throttle;
-		driver.set(((maxPWM - minPWM) * (throttle/100)) + minPWM);
+        driver.set((int) ((maxPWM - minPWM) * (throttle / 100)) + minPWM);
 		return true;
 	}
 	return false;

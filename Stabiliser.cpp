@@ -1,29 +1,19 @@
 #include "Stabiliser.h"
 
-Stabiliser::Stabiliser(int pitchPlusMotorPin, int pitchNegMotorPin, int rollPlusMotorPin, int rollNegMotorPin) {
-	this->motorGpioPins[0] = pitchPlusMotorPin;
-	this->motorGpioPins[1] = pitchNegMotorPin;
-	this->motorGpioPins[2] = rollPlusMotorPin;
-	this->motorGpioPins[3] = rollNegMotorPin;
-}
+Stabiliser::Stabiliser(int pitchPlusMotorPin, int pitchNegMotorPin, int rollPlusMotorPin, int rollNegMotorPin) :
+		pitchPlusMotor(pitchPlusMotorPin, 0, 100),
+		pitchNegMotor(pitchNegMotorPin, 0, 100),
+		rollPlusMotor(rollPlusMotorPin, 0, 100),
+		rollNegMotor(rollNegMotorPin, 0, 100) {}
 
 Stabiliser::~Stabiliser() {}
 
 bool Stabiliser::initialise() {
 	//Initialise motors
-	for (int i = 0; i < 4; i++) {
-		motors[i] = Motor(motorGpioPins[i], 0, 2000);
-		motors[i].initialise();
-	}
-	
-	//Set motor correction pairs
-	//First index is the axis (YPR)
-	//Second index is whether the motors are additive or subtractive
-	//No yaw control as of yet
-	axisMotorPairs[1][0].push_back(&motors[0]);
-	axisMotorPairs[1][1].push_back(&motors[1]);
-	axisMotorPairs[2][0].push_back(&motors[2]);
-	axisMotorPairs[2][1].push_back(&motors[3]);
+	pitchPlusMotor.initialise();
+	pitchNegMotor.initialise();
+	rollPlusMotor.initialise();
+	rollNegMotor.initialise();
 
 
 	//Initialise IMU
@@ -55,19 +45,15 @@ bool Stabiliser::update() {
 			pidControllers[i].setTarget(0);
 		}
 
-		//Update motors
-		for (int i = 0; i < 3; i++) {
-			//Apply correction to the motor pairs
-			double correction = pidControllers[i].getCorrection();
-			//Add it to the positive motors
-			for (Motor* motorPtr : axisMotorPairs[i][0]) {
-				motorPtr->setThrottle(limitDouble(throttle + correction, 0, 100));
-			}
-			//Subtract it from the negative motors
-			for (Motor* motorPtr : axisMotorPairs[i][1]) {
-				motorPtr->setThrottle(limitDouble(throttle - correction, 0, 100));
-			}
-		}
+		double yawCorrection = pidControllers[0].getCorrection() / 2;
+		double pitchCorrection = pidControllers[1].getCorrection();
+		double rollCorrection = pidControllers[2].getCorrection();
+
+		rollPlusMotor.setThrottle(limitDouble(throttle + rollCorrection + yawCorrection, 0, 100));
+		rollNegMotor.setThrottle(limitDouble(throttle - rollCorrection + yawCorrection, 0, 100));
+
+		pitchPlusMotor.setThrottle(limitDouble(throttle + pitchCorrection - yawCorrection, 0, 100));
+		pitchNegMotor.setThrottle(limitDouble(throttle - pitchCorrection - yawCorrection, 0, 100));
 		return true;
 	}
 	return false;

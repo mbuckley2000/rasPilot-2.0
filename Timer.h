@@ -28,4 +28,3 @@ private:
 	double startTime;
 	struct timeval time;
 };
-

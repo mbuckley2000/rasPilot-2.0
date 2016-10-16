@@ -42,9 +42,11 @@ public:
 private:
 	int motorGpioPins[4];
 	PIDController pidControllers[3];
-	Motor motors[4];
+	Motor pitchPlusMotor;
+	Motor pitchNegMotor;
+	Motor rollPlusMotor;
+	Motor rollNegMotor;
 	IMU imu;
 	double throttle;
-	std::vector<Motor*> axisMotorPairs[3][2];
 	double limitDouble(double value, double min, double max);
 };

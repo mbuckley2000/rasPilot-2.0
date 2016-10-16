@@ -1,9 +1,6 @@
 #include "PWMDriver.h"
-PWMDriver::PWMDriver(int gpioPin) {
-	PWMDriver::gpioPin = gpioPin;
-}
 
-PWMDriver::PWMDriver() {}
+PWMDriver::PWMDriver(int gpioPin) : gpioPin(gpioPin) {}
 
 PWMDriver::~PWMDriver() {}
 
