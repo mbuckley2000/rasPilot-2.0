@@ -1,4 +1,5 @@
 #include "Stabiliser.h"
+#include "IMUPositionEstimater.h"
 
 int main() {
     std::ofstream pigpioDevice;
@@ -34,9 +35,12 @@ int main() {
 	stabiliser.initialise();
 	stabiliser.setThrottle(2);
 
+    IMUPositionEstimater positionEstimater = IMUPositionEstimater(&imu);
+
     while (true) {
         stabiliser.update();
-        std::cout << "YPR: " << imu.getYaw() << ", " << imu.getPitch() << ", " << imu.getRoll() << std::endl;
+        positionEstimater.update();
+        //std::cout << "YPR: " << imu.getYaw() << ", " << imu.getPitch() << ", " << imu.getRoll() << std::endl;
     }
 
     return 0;

@@ -29,6 +29,10 @@ public:
 	double getPitch();
 	double getRoll();
 
+    bool hasNewData();
+
+    void getAcceleration(double *vec);
+
 
 private:
 	// IMU Variables
@@ -54,4 +58,8 @@ private:
 	VectorFloat gravity;    // [x, y, z]            gravity vector
 	float euler[3];         // [psi, theta, phi]    Euler angle container
 	float ypr[3];           // [yaw, pitch, roll]   yaw/pitch/roll container and gravity vector
+
+    bool newDataAvailable;
+
+    double acceleration[3];
 };

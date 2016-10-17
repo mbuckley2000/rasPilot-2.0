@@ -3,7 +3,9 @@
 
 #define PI 3.14159265359
 
-IMU::IMU() {}
+IMU::IMU() {
+	newDataAvailable = false;
+}
 
 IMU::~IMU() {}
 
@@ -65,8 +67,13 @@ bool IMU::read() {
 		mpu.dmpGetGravity(&gravity, &q);
 		mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
 
+		acceleration[0] = mpu.getAccelerationX();
+		acceleration[1] = mpu.getAccelerationY();
+		acceleration[2] = mpu.getAccelerationZ();
+
 		//printf("Current orientation:\n\tYAW:%.2f\tPITCH:%.2f\tROLL:%.2f\n\n", CurrentAngle[0], CurrentAngle[1], CurrentAngle[2]);
 
+		newDataAvailable = true;
 		return(true); //Only case of 0 return is if motors are updated
 	}
 	return false;
@@ -82,4 +89,15 @@ double IMU::getPitch() {
 
 double IMU::getRoll() {
 	return ypr[2] * 180 / PI;;
+}
+
+void IMU::getAcceleration(double *vec) {
+	newDataAvailable = false;
+	vec[0] = acceleration[0];
+	vec[1] = acceleration[1];
+	vec[2] = acceleration[2];
+}
+
+bool IMU::hasNewData() {
+	return newDataAvailable;
 }
