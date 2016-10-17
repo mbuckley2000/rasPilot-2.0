@@ -4,6 +4,24 @@ The rest of the code is licensed under GPL 3.
 
 This is a quadcopter pilot for the Raspberry Pi written in C++
 
+The motor GPIO pins are set in Main.cpp, along with the PID constants
+
+Features:
+-Stabilises itself using PID controllers and the MPU6050's orientation data
+
+WIP Features:
+-Calculates it's position using an openCV library called arUco, the Pi's camera and the MPU6050's accelerometer
+-Holds it's position using PID controllers
+-Automatically tunes it's PID constants for more stable flight using hill-climbing algorithms
+
 Requirements:
 -Uses PigPIO to control the motors' ESCs through the Pi's GPIO. Make sure you have it installed and running as a daemon.
 -Uses an MPU6050 Inertial Measurement Unit to determine the copter's orientation. Make sure you have I2C enabled on your Pi.
+
+To Compile:
+- git clone https://github.com/mbuckley2000/rasPilot-2.0/
+- Set your motor GPIO pins and PID constants now in Main.cpp
+- cd rasPilot-2.0
+- make
+
+To Run: sudo ./Main
