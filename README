@@ -1,0 +1,9 @@
+MPU6050 code is the work of Jeff Rowberg and Richard Hirst. Copied from https://github.com/richardghirst/PiBits/tree/master/MPU6050-Pi-Demo
+
+The rest of the code is licensed under GPL 3.
+
+This is a quadcopter pilot for the Raspberry Pi written in C++
+
+Requirements:
+-Uses PigPIO to control the motors' ESCs through the Pi's GPIO. Make sure you have it installed and running as a daemon.
+-Uses an MPU6050 Inertial Measurement Unit to determine the copter's orientation. Make sure you have I2C enabled on your Pi.
