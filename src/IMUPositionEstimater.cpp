@@ -3,7 +3,7 @@
 //
 
 #include <iomanip>
-#include "IMUPositionEstimater.h"
+#include "../include/IMUPositionEstimater.h"
 
 IMUPositionEstimater::IMUPositionEstimater(IMU *imu) : imu(imu) {
     timer.start();
