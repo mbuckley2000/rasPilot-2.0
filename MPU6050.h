@@ -35,8 +35,10 @@ THE SOFTWARE.
 */
 
 #pragma once
+#ifndef MPU6050_H
+#define MPU6050_H
 
-#include "I2Cdev.h"
+#include "MPU6050_6Axis_MotionApps20.h"
 //#include <avr/pgmspace.h>
 
 #define pgm_read_byte(p) (*(uint8_t *)(p))
@@ -983,3 +985,5 @@ class MPU6050 {
         uint8_t devAddr;
         uint8_t buffer[14];
 };
+
+#endif //MPU6050_H

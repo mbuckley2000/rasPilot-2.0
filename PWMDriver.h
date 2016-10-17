@@ -12,7 +12,7 @@ public:
 		Constructor
 		gpioPin is the pin that the PWM device is connected to
 	*/
-	PWMDriver(int gpioPin);
+	PWMDriver(int gpioPin, std::ofstream *pigpioDevice);
 	~PWMDriver();
 
 	/*
@@ -43,5 +43,5 @@ public:
 private:
 	int gpioPin;
 	int rangeCap;
-    std::ofstream device;
+	std::ofstream *device;
 };

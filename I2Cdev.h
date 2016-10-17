@@ -42,6 +42,8 @@ THE SOFTWARE.
 */
 
 #pragma once
+#ifndef I2CDev_H
+#define I2CDev_H
 
 #ifndef TRUE
 #define TRUE	(1==1)
@@ -72,3 +74,5 @@ class I2Cdev {
 
         static uint16_t readTimeout;
 };
+
+#endif //I2CDev_H

@@ -14,7 +14,7 @@ public:
 		gpioPin is the pin the ESC is connected to
 		minPWM and maxPWM describe the range of PWM pulse lengths that the ESC takes
 	*/
-	Motor(int gpioPin, int minPWM, int maxPWM);
+    Motor(PWMDriver *driver, int minPWM, int maxPWM);
 	~Motor();
 
 	/*
@@ -36,8 +36,7 @@ public:
 
 private:
 	double throttle;
-	PWMDriver driver;
-	int gpioPin;
+    PWMDriver *driver;
 	int maxPWM;
 	int minPWM;
 };

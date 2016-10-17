@@ -16,7 +16,7 @@ public:
 		The pin numbers on the Raspberry Pi's GPIO
 		pitchPlusMotorPin is the pin attached to the motor that would increase the pitch of the copter when turned on etc..
 	*/
-	Stabiliser(int pitchPlusMotorPin, int pitchNegMotorPin, int rollPlusMotorPin, int rollNegMotorPin);
+    Stabiliser(IMU *imu, std::vector<PIDController *> *pidControllers, std::vector<Motor *> *motors);
 	~Stabiliser();
 
 	/*
@@ -40,13 +40,9 @@ public:
 	double getThrottle();
 
 private:
-	int motorGpioPins[4];
-	PIDController pidControllers[3];
-	Motor pitchPlusMotor;
-	Motor pitchNegMotor;
-	Motor rollPlusMotor;
-	Motor rollNegMotor;
-	IMU imu;
+    std::vector<PIDController *> *pidControllers;
+    std::vector<Motor *> *motors;
+    IMU *imu;
 	double throttle;
 	double limitDouble(double value, double min, double max);
 };

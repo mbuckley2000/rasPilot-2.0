@@ -30,6 +30,8 @@ THE SOFTWARE.
 */
 
 #pragma once
+#ifndef MATH_HELPER_H
+#define MATH_HELPER_H
 
 #include <math.h>
 
@@ -213,3 +215,5 @@ class VectorFloat {
             return r;
         }
 };
+
+#endif //MATH_HELPER_H
