@@ -47,7 +47,7 @@ bool ArucoPositioner::initialise() {
 bool ArucoPositioner::update() {
     if (captureFrame()) {
         if (detectMarkers()) {
-            return detectPosition();
+            return calculatePosition();
         }
     }
     return false;
@@ -78,7 +78,7 @@ bool ArucoPositioner::detectMarkers() {
     return false;
 }
 
-bool ArucoPositioner::detectPosition() {
+bool ArucoPositioner::calculatePosition() {
     //So we have our vector of markers: markers
 
     return false;
