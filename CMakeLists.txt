@@ -11,10 +11,12 @@ set(CMAKE_PREFIX_PATH /usr/local/lib)
 find_package(raspicam REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(aruco REQUIRED)
+find_package(pigpio REQUIRED)
 
 
 set(SOURCE_FILES
         /usr/local/include/aruco/aruco.h
+        /usr/local/include/pigpio.h
         /usr/local/include/opencv2/highgui/highgui.hpp
         include/helper_3dmath.h
         src/I2Cdev.cpp
@@ -37,4 +39,4 @@ set(SOURCE_FILES
         include/Timer.h src/IMUPositionEstimater.cpp include/IMUPositionEstimater.h src/ArucoPositioner.cpp include/ArucoPositioner.h src/PositionTracker.cpp include/PositionTracker.h)
 
 add_executable(Pilot ${SOURCE_FILES})
-target_link_libraries(Pilot ${raspicam_CV_LIBS} aruco)
+target_link_libraries(Pilot ${raspicam_CV_LIBS} aruco pigpio)

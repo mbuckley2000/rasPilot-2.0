@@ -4,19 +4,23 @@
 #include "../include/PositionTracker.h"
 
 int main() {
-    std::ofstream pigpioDevice;
-    pigpioDevice.open("/dev/pigpio");
-
-    PWMDriver pitchPlusDriver = PWMDriver(10, &pigpioDevice);
-    PWMDriver pitchNegDriver = PWMDriver(15, &pigpioDevice);
-    PWMDriver rollPlusDriver = PWMDriver(25, &pigpioDevice);
-    PWMDriver rollNegDriver = PWMDriver(23, &pigpioDevice);
+    /*
+     * PINS
+     * WHITE BOTTOM 17
+     * WHITE TOP 23
+     * RED BOTTOM 15
+     * RED TOP 8
+     */
+    PWMDriver pitchPlusDriver = PWMDriver(17);
+    PWMDriver pitchNegDriver = PWMDriver(23);
+    PWMDriver rollPlusDriver = PWMDriver(15);
+    PWMDriver rollNegDriver = PWMDriver(8);
 
     std::vector<Motor *> motors;
-    Motor pitchPlusMotor = Motor(&pitchPlusDriver, 0, 100);
-    Motor pitchNegMotor = Motor(&pitchNegDriver, 0, 100);
-    Motor rollPlusMotor = Motor(&rollPlusDriver, 0, 100);
-    Motor rollNegMotor = Motor(&rollNegDriver, 0, 100);
+    Motor pitchPlusMotor = Motor(&pitchPlusDriver, 0, 1500);
+    Motor pitchNegMotor = Motor(&pitchNegDriver, 0, 1500);
+    Motor rollPlusMotor = Motor(&rollPlusDriver, 0, 1500);
+    Motor rollNegMotor = Motor(&rollNegDriver, 0, 1500);
     motors.push_back(&pitchPlusMotor);
     motors.push_back(&pitchNegMotor);
     motors.push_back(&rollPlusMotor);
@@ -51,9 +55,7 @@ int main() {
         //positionEstimater.update();
         //arucoPositioner.update();
         if (positionTracker.update()) {
-            std::cout << "Pos: " << positionTracker.getPosX() << ", " << positionTracker.getPosY() << ", "
-                      << positionTracker.getPosZ()
-                      << std::endl;
+            //std::cout << "Pos: " << positionTracker.getPosX() << ", " << positionTracker.getPosY() << ", " << positionTracker.getPosZ() << std::endl;
         }
         //std::cout << "YPR: " << imu.getYaw() << ", " << imu.getPitch() << ", " << imu.getRoll() << std::endl;
     }

@@ -29,9 +29,9 @@ bool PositionTracker::update() {
         double newZ = arucoPositioner->getPosZ();
 
         ++count;
-        errorX += (newX - (arucoPosX + imuPosX));
-        errorY += (newY - (arucoPosY + imuPosY));
-        errorZ += (newZ - (arucoPosZ + imuPosZ));
+        xError += (newX - (arucoPosX + imuPosX));
+        yError += (newY - (arucoPosY + imuPosY));
+        zError += (newZ - (arucoPosZ + imuPosZ));
 
         arucoPosX = newX;
         arucoPosY = newY;
@@ -48,13 +48,13 @@ bool PositionTracker::update() {
 }
 
 double PositionTracker::getPosX() {
-    return (arucoPosX + imuPosX) - (errorX / count);
+    return (arucoPosX + imuPosX) - (xError / count);
 }
 
 double PositionTracker::getPosY() {
-    return (arucoPosY + imuPosY) - (errorY / count);
+    return (arucoPosY + imuPosY) - (yError / count);
 }
 
 double PositionTracker::getPosZ() {
-    return (arucoPosZ + imuPosZ) - (errorZ / count);
+    return (arucoPosZ + imuPosZ) - (zError / count);
 }
