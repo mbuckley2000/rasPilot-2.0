@@ -2,7 +2,6 @@
 // Created by matt on 17/10/16.
 //
 
-#include <iomanip>
 #include "../include/IMUPositionEstimater.h"
 
 IMUPositionEstimater::IMUPositionEstimater(IMU *imu) : imu(imu) {
@@ -49,7 +48,7 @@ void IMUPositionEstimater::update() {
                 position[i] += 0.5 * (velocity[i] - lastVelocity[i]) * elapsedTime;
                 //std::cout << "Velocity: " << velocity[0] << ", " << velocity[1] << ", " << velocity[2] << std::endl;
 
-                std::cout << "Position: " << position[0] << ", " << position[1] << ", " << position[2] << std::endl;
+                //std::cout << "Position: " << position[0] << ", " << position[1] << ", " << position[2] << std::endl;
                 lastVelocity[i] = velocity[i];
                 lastAcceleration[i] = acceleration[i];
             }

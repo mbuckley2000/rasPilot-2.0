@@ -1,6 +1,6 @@
 #include "../include/Stabiliser.h"
 #include "../include/IMUPositionEstimater.h"
-#include "../include/PiCam.h"
+#include "../include/ArucoPositioner.h"
 
 int main() {
     std::ofstream pigpioDevice;
@@ -38,12 +38,15 @@ int main() {
 
     IMUPositionEstimater positionEstimater = IMUPositionEstimater(&imu);
 
-    PiCam cam;
-    //cam.arucoCap();
+    raspicam::RaspiCam_Cv camera;
+    aruco::CameraParameters camParam;
+    ArucoPositioner arucoPositioner = ArucoPositioner(&camera, &camParam);
+    arucoPositioner.initialise();
 
     while (true) {
         stabiliser.update();
         positionEstimater.update();
+        arucoPositioner.update();
         //std::cout << "YPR: " << imu.getYaw() << ", " << imu.getPitch() << ", " << imu.getRoll() << std::endl;
     }
 
