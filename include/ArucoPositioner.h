@@ -30,13 +30,16 @@ private:
     aruco::CameraParameters *camParam;
     aruco::MarkerDetector detector;
     cv::Mat frame;
+    vector<aruco::Marker> *markers;
 
     double posX, posY, posZ;
     float markerSize;
 
     bool captureFrame();
 
-    bool detectPosition();
+    bool detectMarkers();
+
+    bool calculatePosition();
 };
 
 #endif //RASPILOT_2_0_ARUCOPOSITIONER_H
