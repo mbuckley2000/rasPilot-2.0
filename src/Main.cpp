@@ -39,7 +39,7 @@ int main() {
     IMUPositionEstimater positionEstimater = IMUPositionEstimater(&imu);
 
     PiCam cam;
-    cam.arucoCap();
+    //cam.arucoCap();
 
     while (true) {
         stabiliser.update();
