@@ -3,7 +3,19 @@ project(rasPilot_2_0)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -w -DDMP_FIFO_RATE=1 -Wall -g -O2")
 
+include_directories(/usr/local/include)
+
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMakeModules")
+
+set(CMAKE_PREFIX_PATH /usr/local/lib)
+find_package(raspicam REQUIRED)
+find_package(OpenCV REQUIRED)
+find_package(aruco REQUIRED)
+
+
 set(SOURCE_FILES
+        /usr/local/include/aruco/aruco.h
+        /usr/local/include/opencv2/highgui/highgui.hpp
         include/helper_3dmath.h
         src/I2Cdev.cpp
         include/I2Cdev.h
@@ -22,6 +34,7 @@ set(SOURCE_FILES
         src/Stabiliser.cpp
         include/Stabiliser.h
         src/Timer.cpp
-        include/Timer.h src/IMUPositionEstimater.cpp include/IMUPositionEstimater.h)
+        include/Timer.h src/IMUPositionEstimater.cpp include/IMUPositionEstimater.h src/PiCam.cpp include/PiCam.h)
 
-add_executable(rasPilot_2_0 ${SOURCE_FILES})
+add_executable(Pilot ${SOURCE_FILES})
+target_link_libraries(Pilot ${raspicam_CV_LIBS})

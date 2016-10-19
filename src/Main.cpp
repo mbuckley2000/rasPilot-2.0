@@ -1,5 +1,6 @@
 #include "../include/Stabiliser.h"
 #include "../include/IMUPositionEstimater.h"
+#include "../include/PiCam.h"
 
 int main() {
     std::ofstream pigpioDevice;
@@ -36,6 +37,9 @@ int main() {
 	stabiliser.setThrottle(2);
 
     IMUPositionEstimater positionEstimater = IMUPositionEstimater(&imu);
+
+    PiCam cam;
+    cam.arucoCap();
 
     while (true) {
         stabiliser.update();
