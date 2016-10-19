@@ -63,7 +63,9 @@ bool ArucoPositioner::detectMarkers() {
     // Ok, let's detect
     //std::cout << "Attempting detect" << std::endl;
 
-    markers = &(detector.detect(frame, *camParam, markerSize));
+
+
+    *markers = detector.detect(frame, *camParam, markerSize);
 
     // for each marker, print out its data
     for (unsigned int i = 0; i < markers->size(); i++) {
