@@ -29,7 +29,7 @@ bool ArucoPositioner::initialise() {
     cout << "Connected to camera =" << camera->getId() << endl;
 
     // read camera parameters if specifed
-    camParam->readFromXMLFile("filename");
+    //camParam->readFromXMLFile("filename");
 
     // read marker size if specified (default value -1)
     markerSize = -1;
@@ -41,7 +41,7 @@ bool ArucoPositioner::initialise() {
     //Set the dictionary you want to work with, if you included option -d in command line
     //see dictionary.h for all types
     detector.setDictionary(
-            "dictionaryName");//cml("-d") return the string after -d in the command line "example: ./program video.avi -d ARUCO", then, returns the string "ARUCO"
+            "ARUCO");//cml("-d") return the string after -d in the command line "example: ./program video.avi -d ARUCO", then, returns the string "ARUCO"
 }
 
 bool ArucoPositioner::update() {
