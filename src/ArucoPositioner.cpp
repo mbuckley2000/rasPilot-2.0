@@ -66,11 +66,11 @@ bool ArucoPositioner::detectMarkers() {
     markers = &(detector.detect(frame, *camParam, markerSize));
 
     // for each marker, print out its data
-    for (unsigned int i = 0; i < markers.size(); i++) {
-        cout << "MARKER: " << markers[i] << endl;
+    for (unsigned int i = 0; i < markers->size(); i++) {
+        cout << "MARKER: " << (*markers)[i] << endl;
     }
 
-    if (markers.size() != 0) {
+    if (markers->size() != 0) {
         cv::imwrite("im.jpg", frame);
         return true;
     }
