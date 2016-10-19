@@ -18,10 +18,11 @@ Requirements:
 -Uses PigPIO to control the motors' ESCs through the Pi's GPIO. Make sure you have it installed and running as a daemon.
 -Uses an MPU6050 Inertial Measurement Unit to determine the copter's orientation. Make sure you have I2C enabled on your Pi.
 
-To Compile:
+To Compile & Run:
 - git clone https://github.com/mbuckley2000/rasPilot-2.0/
-- Set your motor GPIO pins and PID constants now in Main.cpp
+- Set your motor GPIO pins and PID constants now in src/Main.cpp
 - cd rasPilot-2.0
+- mkdir build
+- cmake ..
 - make
-
-To Run: sudo ./Main
+- sudo ./rasPilot-2.0
