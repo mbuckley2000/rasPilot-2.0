@@ -25,4 +25,4 @@ To Compile & Run:
 - mkdir build
 - cmake ..
 - make
-- sudo ./rasPilot-2.0
+- sudo ./Pilot
