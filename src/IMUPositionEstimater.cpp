@@ -25,7 +25,7 @@ IMUPositionEstimater::IMUPositionEstimater(IMU *imu) : imu(imu) {
     velTaken = false;
 }
 
-void IMUPositionEstimater::update() {
+bool IMUPositionEstimater::update() {
     if (imu->hasNewData()) {
         getAcceleration();
 
@@ -53,7 +53,9 @@ void IMUPositionEstimater::update() {
                 lastAcceleration[i] = acceleration[i];
             }
         }
+        return true;
     }
+    return false;
 }
 
 double IMUPositionEstimater::getXPos() {

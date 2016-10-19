@@ -12,7 +12,7 @@ class IMUPositionEstimater {
 public:
     IMUPositionEstimater(IMU *imu);
 
-    void update();
+    bool update();
 
     double getXPos();
 

@@ -34,7 +34,7 @@ set(SOURCE_FILES
         src/Stabiliser.cpp
         include/Stabiliser.h
         src/Timer.cpp
-        include/Timer.h src/IMUPositionEstimater.cpp include/IMUPositionEstimater.h src/ArucoPositioner.cpp include/ArucoPositioner.h)
+        include/Timer.h src/IMUPositionEstimater.cpp include/IMUPositionEstimater.h src/ArucoPositioner.cpp include/ArucoPositioner.h src/PositionTracker.cpp include/PositionTracker.h)
 
 add_executable(Pilot ${SOURCE_FILES})
 target_link_libraries(Pilot ${raspicam_CV_LIBS} aruco)

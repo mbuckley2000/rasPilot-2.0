@@ -1,6 +1,7 @@
 #include "../include/Stabiliser.h"
 #include "../include/IMUPositionEstimater.h"
 #include "../include/ArucoPositioner.h"
+#include "../include/PositionTracker.h"
 
 int main() {
     std::ofstream pigpioDevice;
@@ -43,10 +44,17 @@ int main() {
     ArucoPositioner arucoPositioner = ArucoPositioner(&camera, &camParam);
     arucoPositioner.initialise();
 
+    PositionTracker positionTracker = PositionTracker(&positionEstimater, &arucoPositioner);
+
     while (true) {
         stabiliser.update();
-        positionEstimater.update();
-        arucoPositioner.update();
+        //positionEstimater.update();
+        //arucoPositioner.update();
+        if (positionTracker.update()) {
+            std::cout << "Pos: " << positionTracker.getPosX() << ", " << positionTracker.getPosY() << ", "
+                      << positionTracker.getPosZ()
+                      << std::endl;
+        }
         //std::cout << "YPR: " << imu.getYaw() << ", " << imu.getPitch() << ", " << imu.getRoll() << std::endl;
     }
 
